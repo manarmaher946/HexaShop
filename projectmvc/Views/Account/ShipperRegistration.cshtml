@@ -1,0 +1,42 @@
+﻿@model projectmvc.ViewModel.RegistrationViewModel
+
+@{
+    ViewData["Title"] = "ShipperRegistration";
+    Layout = "_RegistrationLayout";
+}
+
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="ShipperRegistration" asp-asp-controller="Account">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group">
+
+                <label asp-for="UserName" class="control-label "></label>
+                <input asp-for="UserName" class="form-control" style=" width :  18rem;" />
+                <span asp-validation-for="UserName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Password" class="control-label"></label>
+                <input asp-for="Password" class="form-control" style=" width :  18rem;" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ConfirmPassword" class="control-label"></label>
+                <input asp-for="ConfirmPassword" class="form-control" style=" width :  18rem; " />
+                <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Address" class="control-label"></label>
+                <input asp-for="Address" class="form-control" style=" width :  18rem;" />
+                <span asp-validation-for="Address" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+

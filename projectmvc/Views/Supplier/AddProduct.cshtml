@@ -1,0 +1,185 @@
+﻿@model projectmvc.ViewModel.AddProductsViewModel
+@{
+    SelectList CategoryList = new SelectList(ViewBag.categories, "Id", "Name");
+    SelectList SubCategoryList = new SelectList(ViewBag.subCategories, "Id", "Name");
+    ViewData["Title"] = "AddProduct";
+   
+    Layout = "_NavAndFooter";
+
+}
+
+<div class="mx-5 my-5">
+
+    <h4>AddProductsViewModel</h4>
+    <hr />
+
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="AddProduct" asp-controller="Supplier" enctype="multipart/form-data">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                @*category*@
+                <div>
+                    <label asp-for="CategoryId" class="control-label"></label>
+                    <select id="cat" asp-for="CategoryId" class="form-control" asp-items="CategoryList" onchange="GetSupplier()"></select>
+                    <span asp-validation-for="CategoryId" class="text-danger"></span>
+                </div>
+
+                @*SubCategory*@
+                <div>
+                    <label asp-for="SubCategoryId" class="control-label"></label>
+                    <select id="subcat" asp-for="SubCategoryId" class="form-control"></select>
+                    <span asp-validation-for="SubCategoryId" class="text-danger"></span>
+                </div>
+
+
+                <div class="form-group">
+                    <label asp-for="ProductName" class="control-label"></label>
+                    <input asp-for="ProductName" class="form-control" />
+                    <span asp-validation-for="ProductName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ProductDescription" class="control-label"></label>
+                    <input asp-for="ProductDescription" class="form-control" />
+                    <span asp-validation-for="ProductDescription" class="text-danger"></span>
+                </div>
+                @*img*@
+
+                <div class="form-group">
+                    <label asp-for="ImageFile" class="control-label"></label>
+                    <input asp-for="ImageFile" accept="image/*" class="form-control" />
+                    <span asp-validation-for="ImageFile" class="text-danger"></span>
+                </div>
+
+
+                <div class="form-group">
+                    <label asp-for="Price" class="control-label"></label>
+                    <input asp-for="Price" class="form-control" />
+                    <span asp-validation-for="Price" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="PriceafterProfit" class="control-label"></label>
+                    <input asp-for="PriceafterProfit" class="form-control" />
+                    <span asp-validation-for="PriceafterProfit" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Rating" class="control-label"></label>
+                    <input asp-for="Rating" class="form-control" />
+                    <span asp-validation-for="Rating" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Quentity" class="control-label"></label>
+                    <input asp-for="Quentity" class="form-control" />
+                    <span asp-validation-for="Quentity" class="text-danger"></span>
+                </div>
+
+
+                @*Size*@
+                <div class="form-group">
+                    <label asp-for="SizeId" class="control-label"></label>
+                    @foreach (var sz in ViewBag.Sizes)
+                    {
+                        <label class="radio">
+                            <input style="color: black" type="radio" name="SizeID" value="@sz.ID">
+                            <span>@sz.size</span>
+                        </label>
+                    }
+                    <span asp-validation-for="SizeId" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="ColorId" class="control-label"></label>
+                    @foreach (var cl in ViewBag.colors)
+                    {
+                        <label class="radio">
+                            <input style="color: black" type="radio" name="ColorID" value=@cl.ID>
+                            <span>@cl.Name</span>
+                        </label>
+                    }
+                    <span asp-validation-for="ColorId" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div>
+        <a asp-action="Index">Back to List</a>
+    </div>
+</div>
+
+@section Scripts {
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/7.0.3/signalr.min.js"
+        integrity="sha512-/rQxup+foY5qwZmEmvBhb0PHxx/Fd+ESH7Xw+pozdSKhygl+ZSQm1X6LWDQrxz+NoRAZwR03X78UinlY1C4RrQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+
+    <script>
+
+        //1-declare hub "URL"
+        var hub = new signalR.HubConnectionBuilder().withUrl("/AddProduct").
+            build();
+        //2-start connect as online client
+        hub.start().then(function () {
+            console.log("Connected@@");
+        });
+
+
+    </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+    <script>
+
+        function GetSupplier() {
+            var s = $("#cat").val();
+            $("#subcat").html("");
+            console.log(s);
+            $.ajax(
+                {
+                    url: "/SubCategory/SingleProduct",
+                    data: { "id": s },
+
+                    success: function (result) {
+                        console.log(result);
+                        for (let item of result) {
+                            $("#subcat").append("<option value=" + item.id + ">" + item.name + "</option>")
+                        }
+                    }
+                });
+
+        }
+
+    </script>
+}

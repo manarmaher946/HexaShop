@@ -1,0 +1,111 @@
+﻿@using projectmvc.ViewModel
+@model List<Product>
+@{
+
+    Layout = "_NavAndFooter";
+}
+
+<div class="main-banner" id="top" style="padding-top:50px">
+    <section style="background-color: #eee;">
+        <div class="text-center container py-5">
+            <div class="row" id="Lists">
+
+                @foreach (var item in @Model)
+                {
+                    <div class=" col-md-4 mb-4">
+                        <div class="card">
+                            <div class="bg-image hover-zoom ripple ripple-surface ripple-surface-light"
+                             data-mdb-ripple-color="light">
+                                <img src="/UploadedImages/@item.Image" class="w-100 h-50" />
+                            </div>
+                            <div class="card-body">
+                                <a href="/product/SingleProduct/@item.Id " class="text-reset">
+                                    <h5 class="card-title mb-3">@item.Name</h5>
+                                    @for (int i = 0; i < item.Rating; i++)
+                                    {
+                                        <i style="color: gold;" class="fa fa-star"></i>
+
+                                    }
+                                    <br>
+                                    <strong class="ms-2">Price:  @item.Price LE</strong>
+                                    <p class="card-text">@item.Description</p>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                }
+            </div>
+            <a asp-action="Index" type="button" class="btn  btn-outline-secondary mx-auto">Back to List </a>
+        </div>
+    </section>
+</div>
+@section Scripts{
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/7.0.3/signalr.min.js"
+        integrity="sha512-/rQxup+foY5qwZmEmvBhb0PHxx/Fd+ESH7Xw+pozdSKhygl+ZSQm1X6LWDQrxz+NoRAZwR03X78UinlY1C4RrQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script>
+
+        //1-declare hub "URL"
+        var hub = new signalR.HubConnectionBuilder().withUrl("/AddProduct").
+            build();
+        //2-start connect as online client
+        hub.start().then(function () {
+            console.log("Connected@@");
+        });
+        var p = @ViewBag.Id;
+        hub.on("NewProductAdd", function (productObj, cid, counter) {
+
+            console.log(productObj.rating, cid, p);
+            var r = productObj.rating
+            if (cid == p) {
+
+
+                document.getElementById("Lists").innerHTML +=
+                    ` <div class="col-lg-4 col-md-12 mb-4">
+                                                <div class="card">
+                                                    <div class="bg-image hover-zoom ripple ripple-surface ripple-surface-light"
+                                                         data-mdb-ripple-color="light">
+                                                                        <img src="/UploadedImages/${productObj.image}"  class="w-100" />
+                                                    </div>
+                                                    <div class="card-body">
+                                                                <a href="/product/SingleProduct/${productObj.id} " class="text-reset">
+                                                                    <h5 class="card-title mb-3" id="star">${productObj.name}</h5>
+                                                                 <span id="menu${counter}"> <i></i></span>
+
+                                                                 <br>
+                                                            <strong class="ms-2">Price:${productObj.price} LE</strong>
+                                                                <p class="card-text">${productObj.description}</p>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                 `
+
+                function insertAfter(newNode, existingNode) {
+                    existingNode.parentNode.insertBefore(newNode, existingNode.nextSibling);
+                }
+
+                let menu = document.getElementById("menu" + counter);
+
+                for (var x = 0; x < r; x++) {
+                    let li = document.createElement('i');
+                    li.className = 'fa fa-star';
+                    li.style.color = 'gold ';
+                    li.style.paddingRight = '5px';
+
+                    insertAfter(li, menu.lastElementChild);
+                }
+            }
+        });
+
+
+
+
+
+    </script>
+
+
+}

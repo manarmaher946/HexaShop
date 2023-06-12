@@ -1,0 +1,29 @@
+﻿@model List<Product>
+@{
+    ViewData["Title"] = "Supplier Data";
+    Layout = "_NavAndFooter";
+
+}
+
+<div class="main-banner" id="top" style="padding:70px">
+
+    <a class="btn btn-secondary" href="/Supplier/AddProduct">
+        Add Product
+    </a>
+    <div class="image-container">
+        <div class="product-list">
+
+            @foreach (var item in Model)
+            {
+                <div class="product">
+                    <img src="~/UploadedImages/@item.Image" alt="Product 1" />
+                    <h5 class="card-title">@item.Name</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">@item.PriceafterProfit</h6>
+                    <p class="card-text">@item.Description</p>
+                </div>
+
+            }
+        </div>
+    </div>
+</div>
+

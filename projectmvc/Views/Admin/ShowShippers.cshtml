@@ -1,0 +1,41 @@
+﻿@model List<Shipper>
+@{
+    ViewData["Title"] = "ShowShippers";
+    Layout = "_DashBord";
+}
+
+<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4" style="margin-right:170px ; margin-top:50px">
+
+
+    <h1>Show Shippers</h1>
+
+
+
+    <div class="table-responsive">
+        <table class="table table-striped table-sm">
+            <thead>
+                <tr>
+
+                    <th scope="col">Name</th>
+                    <th scope="col">Address</th>
+                    <th scope="col">IsValid</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var Shiper in Model)
+                {
+                    <tr>
+
+                        <td>@Shiper.shipper.UserName</td>
+                        <td>@Shiper.shipper.Address</td>
+                        <td>@Shiper.IsValid</td>
+
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</main>
+
+

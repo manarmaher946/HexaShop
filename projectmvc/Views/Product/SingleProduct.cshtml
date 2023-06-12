@@ -1,0 +1,363 @@
+﻿@using projectmvc.ViewModel
+@model ProductSizeColorViewModel
+@{
+    ViewData["Title"] = "Single Product";
+
+    Layout = "_NavAndFooter";
+
+}
+
+<!-- ***** Main Banner Area Start ***** -->
+
+
+
+<div id="Err"></div>
+
+    @*    Product comment*@
+
+        <section class="section" id="product" style="margin-top:-12%">
+            <div class="page-heading" id="top">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="inner-content">
+                                <!--Here we put the name of product-->
+                                <h2>@Model.Product.Name</h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <form class="section" id="SignalProduct">
+
+                <input id="UserID" Value="@ViewBag.UserId" type="hidden"/>
+                <input id="UserName" value="@ViewBag.UserName" type="hidden"/>
+
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4" >
+                        <!--here put the image of product-->
+                        <div class="left-images">
+                            <img src="~/UploadedImages/@Model.Product.Image" alt="..." />
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="right-content">
+                            <!--Here we put the name of product-->
+                            <h4>@Model.Product.Name</h4>
+                            <span class="price">@Model.Product.PriceafterProfit LE</span>
+                            <!--foreach in review to put the stars-->
+                            <ul class="stars d-flex">
+                                @for (int i = 0; i < Model.Product.Rating; i++)
+                                {
+                                    <li><i style="color: gold;" class="fa fa-star"></i></li>
+                                }
+
+                            </ul>
+                            <span>
+                                @Model.Product.Description
+                            </span>
+
+                            <hr>
+
+                                <div class="sizes mt-2 form-group">
+                                    <h6 class="text-uppercase">Size</h6>
+
+                                    @foreach (var sz in Model.Sizes)
+                                    {
+                                        <label class="radio">
+                                            <input class ="Size" type="radio" name="size" value="@sz.ID">
+                                            <span id="sizes">@sz.size</span>
+                                        </label>
+                                    }
+
+                            </div>
+
+                            @*forLoop in ProductSizeColor*@
+                                <div class="Colors mt-2 form-group" id="Colors">
+                                    
+                                    @*@foreach (var c in Model.Colors)
+                                    {
+                                        <label class="radio">
+                                            <input type="radio" name="color" value="@c.ID">
+                                            <span id="colors">@c.Name</span>
+                                        </label>
+
+                                    }*@
+                                </div>
+                            <hr>
+                                <div class="total mt-2">
+                                    <h4>Total: @Model.Product.PriceafterProfit LE</h4>
+                                    <input type="hidden" name="ProductID" value="@Model.Product.Id">
+                                    <input type="submit" class="btn btn-info mt-2"  value="Add To Cart"/>
+
+                                    
+                                </div>
+                                <div class="alert alert-success alert-dismissible" id="AlertMsg" style="visibility:hidden">
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                                    This product Added Successfully.
+                                </div>
+                                <div class="alert alert-success alert-dismissible" id="Exist" style="visibility:hidden">
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                                    This product is exist in your cart go to increase quantity
+                                </div>
+                        </div>
+                    </div>
+                   <div class="col-md-4 " >
+
+                    <div class="card shadow-0 border" style="background-color: #f0f2f5;">
+                        <div class="card-body p-4" id="cmntList">
+                            <div class="form-outline mb-4">
+
+                                <input type="text" class="form-control" id="cmnt" placeholder="Type comment..." style="background-color:aliceblue" />
+                                <input type="button" onclick="addCmnt()" class="main-border-button btn btn-muted" value="+ Add a Comment" />
+                            </div>
+
+                            @*coment*@
+                            @foreach (var item in @ViewBag.AllComents)
+                            {
+                                <div class="card mb-4" id="cmntListUser">
+
+                                    <div class="card-body">
+
+
+                                        <div class="d-flex justify-content-between">
+                                            <div class="d-flex flex-row align-items-center">
+                                                <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(4).webp" alt="avatar" width="25"
+                                                     height="25" />
+
+                                                <p class="small mb-0 ms-2">@item.CustomerName</p>
+                                            </div>
+                                            <div class="d-flex flex-row align-items-center" id="cmntLists">
+
+                                                <p class="small text-muted mb-0 ">@item.Comment</p>
+                                                <i class="far fa-thumbs-up mx-2 fa-xs text-black" style="margin-top: -0.16rem;"></i>
+                                                <p class="small text-muted mb-0">3</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            }
+
+
+
+
+                        </div>
+                    </div>
+                </div>
+
+                </div>
+            </div>
+
+
+            </form>
+
+        </section>
+
+
+
+<!-- ***** Product Area End ***** -->
+<!-- jQuery -->
+<script src="/assets/js/jquery-2.1.0.min.js"></script>
+
+<!-- Bootstrap -->
+<script src="/assets/js/popper.js"></script>
+<script src="/assets/js/bootstrap.min.js"></script>
+
+<!-- Plugins -->
+<script src="/assets/js/owl-carousel.js"></script>
+<script src="/assets/js/accordions.js"></script>
+<script src="/assets/js/datepicker.js"></script>
+<script src="/assets/js/scrollreveal.min.js"></script>
+<script src="/assets/js/waypoints.min.js"></script>
+<script src="/assets/js/jquery.counterup.min.js"></script>
+<script src="/assets/js/imgfix.min.js"></script>
+<script src="/assets/js/slick.js"></script>
+<script src="/assets/js/lightbox.js"></script>
+<script src="/assets/js/isotope.js"></script>
+<script src="/assets/js/quantity.js"></script>
+
+<!-- Global Init -->
+<script src="/assets/js/custom.js"></script>
+
+
+
+
+@section Scripts {
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/7.0.3/signalr.min.js"
+        integrity="sha512-/rQxup+foY5qwZmEmvBhb0PHxx/Fd+ESH7Xw+pozdSKhygl+ZSQm1X6LWDQrxz+NoRAZwR03X78UinlY1C4RrQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+
+    <script>
+
+
+        
+            $('.Size').change(function () {
+                var SizeID = $("input[name='size']:checked").val();
+                var ProductID = @Model.Product.Id;
+
+            $("#Colors").html("");
+            $("#Colors").append(`<h6 class="text-uppercase">Colors</h6>`);
+
+                $.ajax(
+                    {
+                        url: "/Product/GetColors",
+                        data: { "ProductID": ProductID, "SizeID" : SizeID},
+
+                        success: function (result) {
+                            console.log(result);
+                            for (let item of result) {
+                            $("#Colors").append(`<label class="radio">
+                                                        <input type="radio" name="color" value="${item.id}">
+                                                        <span id="colors">${item.name}</span>
+                                                    </label>`)
+                            }
+                        }
+                    }
+                );
+            });
+
+        
+
+
+
+
+        var username = $("#UserName").val();
+        var productId = @Model.Product.Id;
+        console.log(productId)
+        //var size = $("#sizes").val();
+        var comments = $("#cmnt").val();
+        //var userid = $("#UserName").val();
+
+          //1-declare hub "URL"
+        var hub = new signalR.HubConnectionBuilder().withUrl("/AddComment").
+            build();
+        //2-start connect as online client
+
+
+        hub.start().then(function () {
+            console.log("Sucess@@");
+        });
+ 
+        var count = 0;
+
+
+        const form = document.getElementById('SignalProduct');
+        form.addEventListener('submit', (event) => {
+            event.preventDefault(); // prevent form submission
+
+            const formData = new FormData(form); // get form data
+
+            // access form values using their names
+            var size = formData.get('size');
+            var color = formData.get('color');
+            var UserID = $("#UserID").val();
+            var ProductID = formData.get('ProductID');
+
+            // do something with the form values
+
+            hub.invoke("AddToCard", parseInt(size), parseInt(color), parseInt(ProductID), UserID);
+        });
+           
+            hub.on("CardAdded", function (obj, c) {
+                console.log(obj);
+                if(obj!=null){
+                document.getElementById("AlertMsg").style.visibility = 'visible';
+                document.getElementById("AlertMsg").style.display = 'block'
+                }
+                else {
+                document.getElementById("Exist").style.visibility = 'visible';
+                document.getElementById("Exist").style.display = 'block'
+                }
+            });
+
+
+        //function CountNotify() {
+        
+        //    console.log("asdasdasdsadasdasd", size);
+
+        //    console.log("Connect22222222222222222222");
+
+           
+        //}
+
+        hub.on("NotSignIn", function () {
+
+            $("#Err").append(`
+               <div class="alert alert-danger alert-dismissible" style="visibility:hidden" >
+                     <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                     You Need To Have Account <a href="/Account/CustomerLogin">Click Here To Login</a>
+                 </div>
+                             `);
+        
+        });
+      
+
+
+        //////4-send data server
+        function addCmnt() {
+            console.log("Connect Success3333");
+           var comments=$("#cmnt").val()
+            var userid = $("#UserID").val();
+            var username = $("#UserName").val();
+            var productId = @Model.Product.Id;
+            console.log(productId + " :product");
+            console.log(comments + ":cmnt");
+            console.log(userid + ":userid");
+
+            hub.invoke("AddCMNT", productId, userid, comments, 2, username);
+          
+
+
+
+        }
+
+        hub.on("CmntAdded", function (pid, msg, userN) {
+            if (productId == pid) {
+                //$("#cmntList").append("<p>" + userN + " " + msg + "</p>");
+
+
+                //$("#cmntListUser").append(`<p class="small mb-0 ms-2" > ${userN} </p>`);
+                $("#cmntList").append(` <div class="card mb-4" id="cmntListUser">
+
+                                        <div class="card-body">
+
+
+                                            <div class="d-flex justify-content-between">
+                                                    <div class="d-flex flex-row align-items-center" >
+                                                    <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(4).webp" alt="avatar" width="25"
+                                                         height="25" />
+
+                                                                <p class="small mb-0 ms-2">${userN}</p>
+                                                </div>
+                                                    <div class="d-flex flex-row align-items-center" id="cmntLists">
+
+                                                                <p class="small text-muted mb-0 " >${msg}</p>
+                                                    <i class="far fa-thumbs-up mx-2 fa-xs text-black" style="margin-top: -0.16rem;"></i>
+                                                    <p class="small text-muted mb-0">3</p>
+                                                </div>
+                                            </div>
+                                            </div>
+
+                                        </div>`);
+
+
+            }
+            $("#cmnt").val('');
+
+        });
+
+
+        
+      
+
+
+    </script>
+}

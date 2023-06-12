@@ -1,0 +1,84 @@
+.sizes h6, .Colors h6 {
+    display: inline;
+    margin-right: 10px;
+}
+
+label.radio {
+    cursor: pointer
+}
+
+    label.radio input {
+        position: absolute;
+        top: 0;
+        left: 0;
+        visibility: hidden;
+        pointer-events: none
+    }
+
+    label.radio span {
+        color: black;
+        padding: 2px 9px;
+        border: 1px solid black;
+        background-color: #fff;
+        display: inline-block;
+        /*color: black;*/
+        border-radius: 2px;
+        text-transform: uppercase
+    }
+
+        label.radio span:hover {
+            border: 1px solid black;
+            background-color: black;
+            color: white;
+        }
+
+    label.radio input:checked + span {
+        border-color: black;
+        background-color: black;
+        color: #fff
+    }
+
+
+.Colors {
+    margin-top: 20px;
+}
+
+.black {
+    border-radius: 100%;
+    border: none;
+    width: 20px;
+    height: 20px;
+    background-color: black;
+}
+
+.red {
+    border-radius: 100%;
+    border: none;
+    width: 20px;
+    height: 20px;
+    background-color: red;
+}
+
+.white {
+    border-radius: 100%;
+    border: 0.5px solid black;
+    width: 20px;
+    height: 20px;
+    background-color: white;
+}
+
+.blue {
+    border-radius: 100%;
+    border: none;
+    width: 20px;
+    height: 20px;
+    background-color: blue;
+}
+
+.green {
+    border-radius: 100%;
+    border: none;
+    width: 20px;
+    height: 20px;
+    background-color: green;
+}

@@ -1,0 +1,74 @@
+﻿@model List<Category>
+@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+   
+@{
+    ViewData["Title"] = "AllProduct";
+
+   Layout = "_CategoryLayout";
+}
+
+    <!-- ***** Main Banner Area Start ***** -->
+    <div class="main-banner" id="top">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="left-content">
+                        <div class="thumb">
+                            <div class="inner-content">
+                                <h4>We Are Hexashop</h4>
+                            <span>Awesome, &amp; Creative Fashion Brand </span>
+
+                            </div>
+
+                            <img src="/assets/images/left-banner-image.jpg" alt="">
+                        </div>
+                    </div>
+                </div>
+                @*for*@
+             
+                <div class="col-lg-6">
+                    <div class="right-content">
+                        <div class="row">
+                        @foreach (var item in Model)
+                        {
+                            <div class="col-lg-6">
+                                <div class="right-first-image h-50">
+                                    <div class="thumb">
+                                        <div class="inner-content">
+                                            @*type*@
+                                            <h4>@item.Name</h4>
+                                            @*desciption*@
+                                      @*  <span>Best Clothes For Women</span>*@
+
+                                            <span>@item.Description</span>
+                                        </div>
+                                        <div class="hover-content">
+                                            <div class="inner">
+                                            @*type*@
+                                                <h4>@item.Name</h4>
+
+                                                <p>You Can Find What You Want in Fashionable Way.</p>
+                                                <div class="main-border-button">
+                                                    @*go to details / *@
+                                                    <a href="/category/GetAllProductByCategory/@item.Id">Discover More</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @*item.Images*@
+                                        <img src="/assets/images/@item.Image">
+                                    </div>
+                                </div>
+                            </div>
+                            }
+                           
+                    </div>
+                </div>
+
+            </div>
+                   @*end for*@
+        </div>
+    </div>
+    <!-- ***** Main Banner Area End ***** -->
+

@@ -1,0 +1,60 @@
+﻿@model projectmvc.ViewModel.RoleViewModel
+
+@{
+    ViewData["Title"] = "New";
+    Layout = "_NavAndFooter";
+}
+
+<section class="text-center">
+    <!-- Background image -->
+    <div class="p-5 bg-image" style="
+        background-image: url('https://mdbcdn.b-cdn.net/img/new/fluid/nature/015.webp');
+        height: 300px;
+        "></div>
+    <!-- Background image -->
+
+    <div class="card mx-4 mx-md-5 shadow-5-strong" style="
+        margin-top: -100px;
+        background: hsla(0, 0%, 100%, 0.8);
+        backdrop-filter: blur(30px);
+        ">
+        <div class="card-body py-5 px-md-5">
+
+            <div class="row d-flex justify-content-center">
+                <div class="col-lg-8">
+                    <h2 class="fw-bold mb-5">Add Role</h2>
+                    <form asp-action="New">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                        <!-- 2 column grid layout with text inputs for the first and last names -->
+
+                        <div class="form-outline mb-4">
+                            <label asp-for="RoleName" class="form-label" for="form3Example2" style="font-size:20px"> Role Name</label>
+                            <input asp-for="RoleName" id="form3Example2" class="form-control" />
+                            <span asp-validation-for="RoleName" class="text-danger"></span>
+                        </div>
+
+                        <!-- Password input -->
+                        @* <div class="form-outline mb-4">
+                        <input type="text" id="form3Example2" class="form-control" />
+                        <label class="form-label" for="form3Example2">Last name</label>
+                        </div>*@
+
+
+                        <!-- Submit button -->
+                        <button type="submit" class="btn btn-secondary btn-block mb-4">
+                            Create
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    <a href="http://localhost:5196/category/index" class="btn  btn-outline-secondary" style="margin:20px">Back to List</a>
+    </div>
+</section>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

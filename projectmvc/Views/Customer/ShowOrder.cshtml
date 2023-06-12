@@ -1,0 +1,50 @@
+﻿@model List<Orders>
+@{
+    ViewData["Title"] = "ShowOrder";
+}
+
+<h1>MyOrders</h1>
+
+<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4" style="margin-right:170px ; margin-top:50px">
+    <h2>Orders</h2>
+    <div class="table-responsive">
+        <table class="table table-striped table-sm">
+            <thead>
+                <tr>
+                    <th scope="col">OrderDATE</th>
+                    <th scope="col">ArrivedDate</th>
+                    <th scope="col">TOTAL</th>
+                    <th scope="col">Shipper Name</th>
+                    <th scope="col">Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var order in Model)
+                {
+                    <tr>
+
+                        <td>@order.OrderDate.ToShortDateString()</td>
+                        @if (order.ArrivedDate != null)
+                        {
+                            <td>@order.ArrivedDate</td>
+                        }
+                        else
+                        {
+                            <td>Order Havn't accepted yet!  </td>
+                        }
+                        <td>@order.TotalPrice.ToString("C")</td>
+                        @if(order.Shipper!=null)
+                        {
+                            <td>@order.Shipper.shipper.UserName</td>
+                        }
+                        else
+                        {
+                            <td>Not Assigned</td>
+                        }
+                        <td>@order.OrderStatus.Name</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</main>

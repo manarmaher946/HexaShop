@@ -1,0 +1,64 @@
+﻿
+
+@*// in shipper show all order assigned *@
+@{
+    ViewData["Title"] = "AllProductAssigned";
+
+    Layout = "_NavAndFooter";
+}
+
+<div class="row mt-5 ">
+
+    <div class="my-5"></div>
+
+    <div class="container mb-5 ">
+                <div class="col-md-12" >
+                  <div class="site-blocks-table">
+                    <table class="table" >
+                      <thead>
+                        <tr>
+                          <th class="product-thumbnail">Image</th>
+                          <th class="product-name">Product</th>
+                          <th class="product-price">Price</th>
+                          <th class="product-quantity">Quantity</th>
+                          <th class="product-total">Total</th>
+                          <th class="product-remove">Address</th>
+                        </tr>
+                      </thead>
+
+                    <tbody>
+                        @*for*@
+                        <tr>
+                            <td class="product-thumbnail">
+                                @*item.imgs*@
+                                <img src="/assets/images/kid-03.jpg" alt="Image" class="img-fluid .5rem">
+                            </td>
+                            <td class="product-name">
+                                @*name*@
+                                <h2 class="h5 text-black">Product 1</h2>
+                            </td>
+                            @*price*@
+                            <td>$49.00</td>
+
+                            <td>
+                               Quentity
+                            </td>
+                            @*totlat*@
+                            <td>$49.00</td>
+                            @*address*@
+                            <td>Asyit</td>
+                        </tr>
+                       </tbody>
+                    </table>
+                  </div>
+            </div>
+        </div>
+    </div>
+ </div>
+
+
+
+<div class="col-md-4 mb-3 mb-md-0 mx-auto">
+    <button class="btn btn-dark btn-md btn-outline-success ml-5 mr-5">Accept Order</button>
+    <button class="btn btn-dark btn-md btn-outline-danger ">Decline Order</button>
+</div>

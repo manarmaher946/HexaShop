@@ -1,0 +1,706 @@
+﻿<html>
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Hexashop Ecommerce</title>
+
+
+    <!-- Additional CSS Files -->
+    <link rel="stylesheet" type="text/css" href="/assets/css/bootstrap.min.css">
+
+    <link rel="stylesheet" type="text/css" href="/assets/css/font-awesome.css">
+
+    <link rel="stylesheet" href="/assets/css/templatemo-hexashop.css">
+
+    <link rel="stylesheet" href="/assets/css/owl-carousel.css">
+
+    <link rel="stylesheet" href="/assets/css/lightbox.css">
+
+</head>
+<body>
+
+    <header class="header-area header-sticky">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <nav class="main-nav">
+                        <!-- ***** Logo Start ***** -->
+                        <a href="/Category/index" class="logo mt-3">
+                            <img src="/assets/images/logo.png">
+                        </a>
+                        <!-- ***** Logo End ***** -->
+                        <!-- ***** Menu Start ***** -->
+                        <ul class="nav">
+
+                            <li class="scroll-to-section"><a href="#top" class="active">Category</a></li>
+
+                            <li class="scroll-to-section"><a href="/category/GetAllProductByCategory/1">Men</a></li>
+                            <li class="scroll-to-section"><a href="/category/GetAllProductByCategory/2">Women</a></li>
+                            <li class="scroll-to-section"><a href="/category/GetAllProductByCategory/3">Kid</a></li>
+                               
+                               @if (User.IsInRole("Customer"))
+                                 {
+                                <li class="scroll-to-section"><a href="/Customer/ShowOrder">MyOrders</a></li>
+
+                                }
+
+                                @if (User.Identity.IsAuthenticated)
+                                 {
+                                <li class="scroll-to-section"><a href="/Account/signOut">SignOut</a></li>
+                                  }
+                                else{
+                             <li class="dropdown show">
+                                <a class="dropdown-toggle" href="/Account/Login" data-toggle="dropdown">
+                                    Register As
+                                </a>
+
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                    <a class="dropdown-item" href="/Account/CustomerRegistration">Customer</a>
+                                    <a class="dropdown-item" href="/Account/SupplierRegistration">Supplier</a>
+                                    <a class="dropdown-item" href="/Account/ShipperRegistration">Shipper</a>
+                                </div>
+                            </li>
+
+                            <li class="scroll-to-section"><a href="/Account/Login">Login</a></li>
+                            }
+                        </ul>
+                        <a class='menu-trigger'>
+                            <span>Menu</span>
+                        </a>
+                        <!-- ***** Menu End ***** -->
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- ***** cat Start ***** -->
+
+
+    <div class="page-headin g" id="top">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="inner-content">
+                        <h2>Check Our Categories</h2>
+                        <span>Awesome &amp; Creative Fashion Brand</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ***** cat End ***** -->
+
+
+    <div>
+        @RenderBody()
+    </div>
+
+
+      <!-- ***** Explore Area Starts ***** -->
+    <section class="section" id="explore">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="left-content">
+                        <h2>Explore Our Products</h2>
+                        <span>You are allowed to use this HexaShop . You can feel free to buy or return this product as you wish.</span>
+                        <div class="quote">
+                            <i class="fa fa-quote-left"></i><p>You are not allowed to redistribute this template ZIP file on any other website.</p>
+                        </div>
+                        @*<p>There are 5 pages included in this HexaShop Template and we are providing it to you for absolutely free of charge at our TemplateMo website. There are web development costs for us.</p>*@
+                        <p>If this Website is beneficial for your website or business, please kindly <a rel="nofollow" href="https://paypal.me/templatemo" target="_blank">support us</a> a little via PayPal. Please also tell your friends about our great website. Thank you.</p>
+                        <div class="main-border-button">
+                            <a href="products.html">Discover More</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="right-content">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="leather">
+                                    <h4>Leather Bags</h4>
+                                    <span>Latest Collection</span>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="first-image">
+                                    <img src="/assets/images/explore-image-01.jpg" alt="">
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="second-image">
+                                    <img src="/assets/images/explore-image-02.jpg" alt="">
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="types">
+                                    <h4>Different Types</h4>
+                                    <span>Over 304 Products</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ***** Explore Area Ends ***** -->
+    <!-- ***** Social Area Ends ***** -->
+    <section class="gradient-custom">
+        <div class="container my-5 py-5">
+            <div class="row d-flex justify-content-center">
+                <div class="col-md-12">
+                    <div class="text-center mb-4 pb-2">
+                        <i class="fas fa-quote-left fa-3x text-white"></i>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-body px-4 py-5">
+                            <!-- Carousel wrapper -->
+                            <div id="carouselDarkVariant" class="carousel slide carousel-dark" data-mdb-ride="carousel">
+                                <!-- Indicators -->
+                                @*        <div class="carousel-indicators mb-0">
+                                <button data-mdb-target="#carouselDarkVariant" data-mdb-slide-to="0" class="active"
+                                aria-current="true" aria-label="Slide 1"></button>
+                                <button data-mdb-target="#carouselDarkVariant" data-mdb-slide-to="1"
+                                aria-label="Slide 1"></button>
+                                <button data-mdb-target="#carouselDarkVariant" data-mdb-slide-to="2"
+                                aria-label="Slide 1"></button>
+                                </div>*@
+
+                                <!-- Inner -->
+                                <div class="carousel-inner pb-5">
+                                    <!-- Single item -->
+                                    <div class="carousel-item active">
+                                        <div class="row d-flex justify-content-center">
+                                            <div class="col-lg-10 col-xl-8">
+                                                <div class="row">
+                                                    <div class="col-lg-4 d-flex justify-content-center">
+                                                        <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(1).webp"
+                                                             class="rounded-circle shadow-1 mb-4 mb-lg-0" alt="woman avatar" width="150"
+                                                             height="150" />
+                                                    </div>
+                                                    <div class="col-9 col-md-9 col-lg-7 col-xl-8 text-center text-lg-start mx-auto mx-lg-0">
+                                                        <h4 class="mb-4">Maria Smantha</h4>
+                                                        <p class="mb-0 pb-3">
+                                                            I just wanted to take a moment to express my deepest gratitude for the exceptional service you have provided me. Your user-friendly website,
+                                                            quick and easy checkout process, and prompt delivery truly exceeded my expectations.
+
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Single item -->
+                                    <div class="carousel-item">
+                                        <div class="row d-flex justify-content-center">
+                                            <div class="col-lg-10 col-xl-8">
+                                                <div class="row">
+                                                    <div class="col-lg-4 d-flex justify-content-center">
+                                                        <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(2).webp"
+                                                             class="rounded-circle shadow-1 mb-4 mb-lg-0" alt="woman avatar" width="150"
+                                                             height="150" />
+                                                    </div>
+                                                    <div class="col-9 col-md-9 col-lg-7 col-xl-8 text-center text-lg-start mx-auto mx-lg-0">
+                                                        <h4 class="mb-4">Lisa Cudrow </h4>
+                                                        <p class="mb-0 pb-3">
+                                                            I am amazed by the wide range of products you offer, and the quality of each item is simply outstanding. Your dedication to customer satisfaction is truly impressive,
+                                                            and it is evident that you value your customers' needs and preferences above all else.
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Single item -->
+                                    <div class="carousel-item">
+                                        <div class="row d-flex justify-content-center">
+                                            <div class="col-lg-10 col-xl-8">
+                                                <div class="row">
+                                                    <div class="col-lg-4 d-flex justify-content-center">
+                                                        <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(9).webp"
+                                                             class="rounded-circle shadow-1 mb-4 mb-lg-0" alt="woman avatar" width="150"
+                                                             height="150" />
+                                                    </div>
+                                                    <div class="col-9 col-md-9 col-lg-7 col-xl-8 text-center text-lg-start mx-auto mx-lg-0 quote">
+                                                        <h4 class="mb-4">John Smith</h4>
+                                                        <p class="mb-0 pb-3">
+                                                            I am delighted to have found your site and will definitely recommend it to my family and friends. Thank you again for your outstanding service,
+                                                            and I look forward to continuing to shop with you in the future.
+
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Inner -->
+                                <!-- Controls -->
+                                <button class="carousel-control-prev" type="button" data-mdb-target="#carouselDarkVariant"
+                                        data-mdb-slide="prev">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Previous</span>
+                                </button>
+                                <button class="carousel-control-next" type="button" data-mdb-target="#carouselDarkVariant"
+                                        data-mdb-slide="next">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Next</span>
+                                </button>
+                            </div>
+                            <!-- Carousel wrapper -->
+                        </div>
+                    </div>
+
+                    <div class="text-center mt-4 pt-2">
+                        <i class="fas fa-quote-right fa-3x text-white"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ***** Social Area Starts ***** -->
+    <section class="section" id="social">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="section-heading">
+                        <h2>Social Media</h2>
+                        <span>Details to details is what makes Hexashop different from the other themes.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row images">
+                <div class="col-2">
+                    <div class="thumb">
+                        <div class="icon">
+                            <a href="http://instagram.com">
+                                <h6>Fashion</h6>
+                                <i class="fa fa-instagram"></i>
+                            </a>
+                        </div>
+                        <img src="/assets/images/instagram-01.jpg" alt="">
+                    </div>
+                </div>
+                <div class="col-2">
+                    <div class="thumb">
+                        <div class="icon">
+                            <a href="http://instagram.com">
+                                <h6>New</h6>
+                                <i class="fa fa-instagram"></i>
+                            </a>
+                        </div>
+                        <img src="/assets/images/instagram-02.jpg" alt="">
+                    </div>
+                </div>
+                <div class="col-2">
+                    <div class="thumb">
+                        <div class="icon">
+                            <a href="http://instagram.com">
+                                <h6>Brand</h6>
+                                <i class="fa fa-instagram"></i>
+                            </a>
+                        </div>
+                        <img src="/assets/images/instagram-03.jpg" alt="">
+                    </div>
+                </div>
+                <div class="col-2">
+                    <div class="thumb">
+                        <div class="icon">
+                            <a href="http://instagram.com">
+                                <h6>Makeup</h6>
+                                <i class="fa fa-instagram"></i>
+                            </a>
+                        </div>
+                        <img src="/assets/images/instagram-04.jpg" alt="">
+                    </div>
+                </div>
+                <div class="col-2">
+                    <div class="thumb">
+                        <div class="icon">
+                            <a href="http://instagram.com">
+                                <h6>Leather</h6>
+                                <i class="fa fa-instagram"></i>
+                            </a>
+                        </div>
+                        <img src="/assets/images/instagram-05.jpg" alt="">
+                    </div>
+                </div>
+                <div class="col-2">
+                    <div class="thumb">
+                        <div class="icon">
+                            <a href="http://instagram.com">
+                                <h6>Bag</h6>
+                                <i class="fa fa-instagram"></i>
+                            </a>
+                        </div>
+                        <img src="/assets/images/instagram-06.jpg" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ***** Social Area Ends ***** -->
+
+    <!-- ***** Subscribe Area Starts ***** -->
+    <div class="subscribe">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="section-heading">
+                        <h2>By Subscribing To Our Newsletter You Can Get 30% Off</h2>
+                        <span>Details to details is what makes Hexashop different from the other themes.</span>
+                    </div>
+                    <form id="subscribe" action="" method="get">
+                        <div class="row">
+                          <div class="col-lg-5">
+                            <fieldset>
+                              <input name="name" type="text" id="name" placeholder="Your Name" required="">
+                            </fieldset>
+                          </div>
+                          <div class="col-lg-5">
+                            <fieldset>
+                              <input name="email" type="text" id="email" placeholder="Your Email Address" required="">
+                            </fieldset>
+                          </div>
+                          <div class="col-lg-2">
+                            <fieldset>
+                              <button type="submit" id="form-submit" class="main-dark-button"><i class="fa fa-paper-plane"></i></button>
+                            </fieldset>
+                          </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-lg-4">
+                    <div class="row">
+                        <div class="col-6">
+                            <ul>
+                                <li>Store Location:<br><span>Sunny Isles Beach, FL 33160, United States</span></li>
+                                <li>Phone:<br><span>010-020-0340</span></li>
+                                <li>Office Location:<br><span>North Miami Beach</span></li>
+                            </ul>
+                        </div>
+                        <div class="col-6">
+                            <ul>
+                                <li>Work Hours:<br><span>07:30 AM - 9:30 PM Daily</span></li>
+                                <li>Email:<br><span>info@company.com</span></li>
+                                <li>Social Media:<br><span><a href="#">Facebook</a>, <a href="#">Instagram</a>, <a href="#">Behance</a>, <a href="#">Linkedin</a></span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ***** Subscribe Area Ends ***** -->
+
+
+
+
+    <!-- ***** Footer Start ***** -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="first-item">
+                        <div class="logo">
+                            <img src="/assets/images/white-logo.png" alt="hexashop ecommerce templatemo">
+                        </div>
+                        <ul>
+                            <li><a href="#">16501 Collins Ave, Sunny Isles Beach, FL 33160, United States</a></li>
+                            <li><a href="#">hexashop@company.com</a></li>
+                            <li><a href="#">010-020-0340</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <h4>Shopping &amp; Categories</h4>
+                    <ul>
+                        <li><a href="#">Men’s Shopping</a></li>
+                        <li><a href="#">Women’s Shopping</a></li>
+                        <li><a href="#">Kid's Shopping</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3">
+                    <h4>Useful Links</h4>
+                    <ul>
+                        <li><a href="#">Homepage</a></li>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Help</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3">
+                    <h4>Help &amp; Information</h4>
+                    <ul>
+                        <li><a href="#">Help</a></li>
+                        <li><a href="#">FAQ's</a></li>
+                        <li><a href="#">Shipping</a></li>
+                        <li><a href="#">Tracking ID</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-12">
+                    <div class="under-footer">
+                        <p>
+                            Copyright © 2022 HexaShop Co., Ltd. All Rights Reserved.
+
+                            <br>Design:
+                            <a href="https://templatemo.com" target="_parent" title="free css templates">TemplateMo</a>
+                        </p>
+                        <ul>
+                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                            <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                            <li><a href="#"><i class="fa fa-behance"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+
+
+
+    <!-- jQuery -->
+    <script src="/assets/js/jquery-2.1.0.min.js"></script>
+
+    <!-- Bootstrap -->
+    <script src="/assets/js/popper.js"></script>
+    <script src="/assets/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+
+    <!-- Plugins -->
+    <script src="/assets/js/owl-carousel.js"></script>
+    <script src="/assets/js/accordions.js"></script>
+    <script src="/assets/js/datepicker.js"></script>
+    <script src="/assets/js/scrollreveal.min.js"></script>
+    <script src="/assets/js/waypoints.min.js"></script>
+    <script src="/assets/js/jquery.counterup.min.js"></script>
+    <script src="/assets/js/imgfix.min.js"></script>
+    <script src="/assets/js/slick.js"></script>
+    <script src="/assets/js/lightbox.js"></script>
+    <script src="/assets/js/isotope.js"></script>
+
+    <!-- Global Init -->
+    <script src="/assets/js/custom.js"></script>
+
+
+
+    <script>
+        let isSidenavHidden = false;
+        isSidenavHidden = false;
+        const sidenav = document.getElementById('mdb-sidenav');
+        const instance = mdb.Sidenav.getInstance(sidenav);
+
+
+        let innerWidth = null;
+
+        const setMode = () => {
+            if (window.innerWidth === innerWidth) return;
+
+            innerWidth = window.innerWidth;
+            const isFrontPage = 0;
+
+            if (innerWidth <= 1440 || isFrontPage || isSidenavHidden) {
+                instance.changeMode('over');
+                instance.hide();
+                return;
+            }
+            instance.changeMode('side');
+            instance.show();
+        };
+
+        if (sidenav) {
+            window.addEventListener('resize', setMode);
+            setMode();
+        }
+
+
+
+        function mdbScrollSpyTo(e) {
+            e.preventDefault();
+            const hash = e.target.getAttribute('href');
+            const target = document.getElementById(hash.substring(1));
+
+            window.scroll({
+                top: target.offsetTop - 100,
+                behavior: 'smooth'
+            });
+
+            if (history.pushState) {
+                history.pushState(null, null, hash);
+            } else {
+                location.hash = hash;
+            }
+        }
+
+        document.querySelectorAll('#scrollspy .menu-sidebar a').forEach((link) => {
+            link.addEventListener('click', mdbScrollSpyTo, false);
+        });
+
+
+        if (window.location.hash) {
+            const target = document.getElementById(window.location.hash.substring(1));
+
+            setTimeout(function () {
+                window.scroll({
+                    top: 0
+                });
+
+                setTimeout(() => {
+                    window.scroll({
+                        top: target.offsetTop - 100,
+                        behavior: 'smooth'
+                    });
+                }, 500);
+            }, 1);
+        }
+
+
+
+
+        window.addEventListener("load", (event) => {
+            const locationHash = window.location.hash;
+            const scrollTop = () => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+
+            if (locationHash === "#docsTabsAPI") {
+                const apiTab = document.querySelector('#docs-nav-pills a[href="#docsTabsAPI"]');
+
+                if (apiTab) {
+                    const apiTabsInstance = new mdb.Tab(apiTab);
+
+                    apiTabsInstance.show();
+                    scrollTop();
+                }
+            } else if (locationHash === "#docsTabsOverview") {
+                scrollTop();
+            } else if (["#topTemplates", "#newTemplates", "#trendingTemplates"].indexOf(locationHash) !== -1) {
+                const templateTab = document.querySelector('#templates-nav-pills a[href="' + locationHash + '"]');
+
+                if (templateTab) {
+                    const templateTabsInstance = new mdb.Tab(templateTab);
+
+                    templateTabsInstance.show();
+                    scrollTop();
+                }
+            }
+
+            const navPills = document.querySelectorAll('#docs-nav-pills a[data-mdb-toggle="tab"]');
+
+            if (navPills.length) {
+                navPills.forEach((el) => {
+                    el.addEventListener('click', (e) => {
+                        window.location.hash = e.target.hash;
+
+                        scrollTop();
+                    });
+                });
+            }
+
+            const templatePills = document.querySelectorAll('#templates-nav-pills a[data-mdb-toggle="pill"]');
+
+            if (templatePills.length) {
+                templatePills.forEach((el) => {
+                    el.addEventListener('click', (e) => {
+                        window.location.hash = e.target.hash;
+
+                        scrollTop();
+                    });
+                });
+            }
+        });
+    </script>
+
+    <script>
+        let mouseOnScrollspy
+        const scrollspy = document.querySelector('#scrollspy .menu-sidebar')
+        const footer = document.querySelector('#mdb-footer')
+        const navbar = document.querySelector('#mdb-navbar')
+        const navbarHeight = parseInt(getComputedStyle(navbar).height)
+        const offsetTop = parseInt(getComputedStyle(scrollspy).offsetTop)
+        let windowHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+        new mdb.PerfectScrollbar(scrollspy)
+
+        const handleScrollbarMaxHeight = () => {
+            windowHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+            if (window.scrollY <= 100) {
+                scrollspy.style.maxHeight = `${parseInt(windowHeight) - scrollspy.getBoundingClientRect().top + 86}px`
+            } else {
+                scrollspy.style.maxHeight = `${parseInt(windowHeight) - scrollspy.getBoundingClientRect().top - 16}px`
+            }
+        }
+
+        const scrollIntoActiveElement = (target) => {
+            if (scrollspy.scrollTop > target.offsetTop) {
+                scrollspy.scrollTo(0, target.offsetTop)
+            } else if (scrollspy.scrollTop + scrollspy.clientHeight < target.offsetTop + target.clientHeight) {
+                scrollspy.scrollTo(0, target.offsetTop + target.clientHeight - scrollspy.clientHeight)
+            }
+        }
+
+        scrollspy.addEventListener('mouseover', () => {
+            mouseOnScrollspy = true
+        })
+        scrollspy.addEventListener('mouseout', () => {
+            mouseOnScrollspy = false
+        })
+
+        window.addEventListener('activate.mdb.scrollspy', (e) => {
+            if (mouseOnScrollspy) {
+                return
+            }
+            const activeElements = Array.from(scrollspy.querySelectorAll('#scrollspy .menu-sidebar .active'))
+            scrollIntoActiveElement(activeElements.slice(-1)[0])
+        })
+
+        window.addEventListener('DOMContentLoaded', () => {
+            handleScrollbarMaxHeight()
+            document.querySelector('#scrollspy .ps__rail-y').style.opacity = '1'
+            scrollspy.scroll({
+                top: 1
+            })
+        })
+
+        window.addEventListener('resize', handleScrollbarMaxHeight)
+    </script>
+
+    <script>
+
+        $(function () {
+            var selectedClass = "";
+            $("p").click(function () {
+                selectedClass = $(this).attr("data-rel");
+                $("#portfolio").fadeTo(50, 0.1);
+                $("#portfolio div").not("." + selectedClass).fadeOut();
+                setTimeout(function () {
+                    $("." + selectedClass).fadeIn();
+                    $("#portfolio").fadeTo(50, 1);
+                }, 500);
+
+            });
+        });
+
+    </script>
+
+</body>
+
+
+
+</html>

@@ -1,0 +1,159 @@
+﻿@model List<Product>
+@{
+    ViewData["Title"] = ViewBag.Title;
+    Layout = "_NavAndFooter";
+}
+
+<!-- ***** Main Banner Area Start ***** -->
+<div class="page-heading" id="top">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="inner-content">
+                    <h2>Check Our Products</h2>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ***** Main Banner Area End ***** -->
+
+
+<div class="main-banner" id="top" style="padding-top:100px">
+    <div class="row row-cols-1 row-cols-md-3 g-4" style="padding:15px" id="Lists">
+        @foreach (var item in Model)
+        {
+            <div class="col" style="padding:15px">
+                <div class="card h-100">
+                    <img src="~/UploadedImages/@item.Image" class="card-img-top" alt="..." />
+                    <div class="card-body">
+                        <h5 class="card-title">@item.Name</h5>
+                        @*price*@
+                        <span> @item.PriceafterProfit LE</span>
+                        @*star*@
+                        <br />
+                        @for (int i = 0; i < item.Rating; i++)
+                        {
+                            <i style="color: gold;" class="fa fa-star"></i>
+                        }
+
+                        <p class="card-text">@item.Description</p>
+                        <a type="button" class="btn btn-secondary" href="/Product/SingleProduct/@item.Id">Details</a>
+                    </div>
+                </div>
+            </div>
+        }
+
+    </div>
+</div>
+
+@section scripts{
+
+
+
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/7.0.3/signalr.min.js"
+        integrity="sha512-/rQxup+foY5qwZmEmvBhb0PHxx/Fd+ESH7Xw+pozdSKhygl+ZSQm1X6LWDQrxz+NoRAZwR03X78UinlY1C4RrQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+
+    <script>
+
+
+
+        //1-declare hub "URL"
+        var hub = new signalR.HubConnectionBuilder().withUrl("/AddProduct").
+            build();
+        //2-start connect as online client
+        hub.start().then(function () {
+            console.log("Connected@@");
+        });
+
+
+
+
+        hub.on("NewProductAdd", function (productObj, cid, counter) {
+
+            console.log(productObj);
+            var r = productObj.rating
+            $("#Lists").append(`
+
+
+                                  <div class="col" style="padding:15px">
+                                              <div class="card h-100">
+                               <img src="/UploadedImages/${productObj.image}" class="card - img - top" alt="..." />
+                                          <div class="card-body">
+                                    <h5 class="card-title" > ${productObj.name} < /h5>
+
+                              <span id="menu${counter}"> <i></i></span>
+
+                              <span>${productObj.priceafterProfit} LE < /span>
+                                      <br/>
+
+
+
+                                        <p class="card-text" >${productObj.description} LE < /p>
+                                     <a type = "button" class="btn btn-secondary" href = "/Product/SingleProduct/${productObj.id}" > Details < /a>
+                        < /div>
+                        < /div>
+                        < /div>
+
+
+                            `);
+
+        });
+
+
+        function insertAfter(newNode, existingNode) {
+            existingNode.parentNode.insertBefore(newNode, existingNode.nextSibling);
+        }
+
+        let menu = document.getElementById("menu" + counter);
+
+        for (var x = 0; x < r; x++) {
+            let li = document.createElement('i');
+            li.className = 'fa fa-star';
+            li.style.color = 'gold ';
+            li.style.paddingRight = '5px';
+
+            insertAfter(li, menu.lastElementChild);
+        }
+                            
+                        
+
+
+    </script>
+
+
+
+
+
+    <!-- jQuery -->
+    <script src="/js/jquery-2.1.0.min.js"></script>
+
+    <!-- Bootstrap -->
+    <script src="/js/popper.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+
+    <!-- Plugins -->
+    <script src="/js/owl-carousel.js"></script>
+    <script src="/js/accordions.js"></script>
+    <script src="/js/datepicker.js"></script>
+    <script src="/js/scrollreveal.min.js"></script>
+    <script src="/js/waypoints.min.js"></script>
+    <script src="/js/jquery.counterup.min.js"></script>
+    <script src="/js/imgfix.min.js"></script>
+    <script src="/js/slick.js"></script>
+    <script src="/js/lightbox.js"></script>
+    <script src="/js/isotope.js"></script>
+
+    <!-- Global Init -->
+    <script src="/js/custom.js"></script>
+
+
+
+
+ }

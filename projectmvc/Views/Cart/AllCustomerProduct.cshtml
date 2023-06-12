@@ -1,0 +1,284 @@
+﻿
+@model List<Cart>
+@{
+    ViewData["Title"] = ViewBag.Title;
+    Layout = "_NavAndFooter";
+}
+
+
+
+<div class="main-banner" id="top" style="padding-top:70px;" >
+    <section class="h-100 gradient-custom" style="overflow-y:scroll; overflow-x:hidden">
+        <div class="container py-5">
+            <div class="row d-flex justify-content-center my-4">
+                <div class="col-md-8">
+                    <div class="card mb-4" >
+                        <div class="card-header py-3">
+                            <h5 class="mb-0" id="Counts">Cart - @Model.Count() items</h5>
+                        </div>
+
+                        <div class="card-body" id="Lists" >
+                            <!-- Single item -->
+                          @foreach (var item in Model){
+                            <div class="row">
+                                <div class="col-lg-3 col-md-12 mb-4 mb-lg-0">
+                                    <!-- Image -->
+                                    <div class="bg-image hover-overlay hover-zoom ripple rounded" data-mdb-ripple-color="light">
+                                            <img src="~/UploadedImages/@item.ProductSizeColor.Product.Image" class="w-100" />
+                                        <a href="#!">
+                                            <div class="mask" style="background-color: rgba(251, 251, 251, 0.2)"></div>
+                                        </a>
+                                    </div>
+                                    <!-- Image -->
+                                </div>
+
+
+                                <div class="col-lg-5 col-md-6 mb-4 mb-lg-0">
+                                    <!-- Data -->
+                                        <p><strong>@item.ProductSizeColor.Product.Name</strong></p>
+                                        <p>Color: @item.ProductSizeColor.Color.Name</p>
+                                        <p>Size: @item.ProductSizeColor.Size.size</p>
+                                        <a href="/Cart/Delete/@item.Id" type="button" class="btn btn-outline-danger  btn-sm me-1 mb-2" data-mdb-toggle="tooltip"
+                                            title="Remove item" >
+                                              
+                                      <div class="item-remove"><i class="fa fa-trash"></i></div>
+                                    </a>
+                                  
+                                </div>
+
+
+
+
+
+
+                                    <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
+                                        <!-- Quantity -->
+
+                                        <form asp-action="UpdateCart">
+
+
+                                            <div class="d-flex mb-4" style="max-width: 300px">
+                                                <button class="btn btn-outline-secondary" data-mdb-toggle="tooltip"
+                                                    onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
+                                                    <input type="submit" value="" style="display:none">
+                                                    <i class="fa fa-minus"></i>
+                                                </button>
+
+                                                <div class="form-outline">
+                                                    <input id="form1" min="1" max="@item.ProductSizeColor.Quantity" name="quantity" value="@item.Count" type="number" class="form-control" />
+                                                    <input type="hidden" name="id" value="@item.Id">
+
+                                                </div>
+
+                                                <button class="btn btn-outline-secondary" data-mdb-toggle="tooltip"
+                                                    onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
+                                                    <input type="submit" name="plus" value="" style="display:none">
+                                                    <i class="fa fa-plus"></i>
+                                                </button>
+                                            </div>
+
+                                        </form>
+
+
+                                        <!-- Quantity -->
+                                        <!-- Price -->
+                                        <p class="text-start text-md-center">
+                                            <strong>@(item.ProductSizeColor.Product.PriceafterProfit * @item.Count)</strong>
+                                        </p>
+                                        <!-- Price -->
+                                    </div>
+
+
+
+
+
+
+
+
+
+                            </div>
+                            <!-- Single item -->
+
+                            <hr class="my-4" />
+                        
+                        }
+
+                        </div>
+                    </div>
+                    
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <p><strong>Expected shipping delivery</strong></p>
+                            <p class="mb-0">@ViewBag.DateNow - @ViewBag.DateArrive</p>
+                        </div>
+                    </div>
+                    <div class="card mb-4 mb-lg-0">
+                        <div class="card-body">
+                            <p><strong>We accept</strong></p>
+                            <img class="me-2" width="45px"
+                                 src="https://mdbcdn.b-cdn.net/wp-content/plugins/woocommerce-gateway-stripe/assets/images/visa.svg"
+                                 alt="Visa" />
+                            <img class="me-2" width="45px"
+                                 src="https://mdbcdn.b-cdn.net/wp-content/plugins/woocommerce-gateway-stripe/assets/images/amex.svg"
+                                 alt="American Express" />
+                            <img class="me-2" width="45px"
+                                 src="https://mdbcdn.b-cdn.net/wp-content/plugins/woocommerce-gateway-stripe/assets/images/mastercard.svg"
+                                 alt="Mastercard" />
+                            @*  <img class="me-2" width="45px"
+                            src="https://mdbcdn.b-cdn.net/wp-content/plugins/woocommerce/includes/gateways/paypal/assets/images/paypal.webp"
+                            alt="PayPal acceptance mark" />*@
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card mb-4">
+                        <div class="card-header py-3">
+                            <h5 class="mb-0">Summary</h5>
+                        </div>
+                        <div class="card-body">
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0">
+                                    Products
+                                    <span><span id="TotalPrice">@Model.Sum(p=>p.ProductSizeColor.Product.PriceafterProfit*p.Count)</span> LE</span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center px-0">
+                                    Shipping
+                                    <span>Gratis</span>
+                                </li>
+                            </ul>
+                            
+                             <form asp-action="CheckOut"> 
+                                <input type="submit" value="Go to checkout" class="btn btn-secondary btn-lg btn-block"/>
+                             </form>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+                  
+@section Scripts {
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/7.0.3/signalr.min.js"
+        integrity="sha512-/rQxup+foY5qwZmEmvBhb0PHxx/Fd+ESH7Xw+pozdSKhygl+ZSQm1X6LWDQrxz+NoRAZwR03X78UinlY1C4RrQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+
+      <script>
+
+        //1-declare hub "URL"
+        var hub = new signalR.HubConnectionBuilder().withUrl("/AddComment").
+            build();
+        //2-start connect as online client
+        
+        hub.start().then(function () {
+            console.log("Sucess@@");
+        });
+
+
+        hub.on("CardAdded", function (obj, count) {
+            console.log("name"+obj.cart.productSizeColor.product.name);
+            $("#Counts").html(`
+                    Cart -${count} items
+            `);
+            
+                                    
+             //var total = ) +  parseInt( obj.cart.productSizeColor.product.priceafterProfit * obj.cart.count)
+
+            console.log(obj.cart.count);
+            console.log(parseInt($("#TotalPrice").html()));
+            console.log(obj.cart.productSizeColor.product.priceafterProfit);
+
+            var co = obj.cart.count;
+            var z = parseInt($("#TotalPrice").html());
+            var pro = obj.cart.productSizeColor.product.priceafterProfit;
+
+
+            var t = z + co + pro;
+            console.log(t);
+
+            $("#TotalPrice").html(`
+                            ${t}
+                    `);
+                $("#Lists").append(`
+                        <div class="row">
+                                        <div class="col-lg-3 col-md-12 mb-4 mb-lg-0">
+                                            <!-- Image -->
+                                            <div class="bg-image hover-overlay hover-zoom ripple rounded" data-mdb-ripple-color="light">
+                                                            <img src="/UploadedImages/${obj.cart.productSizeColor.product.image}" class="w-100" />
+                                                <a href="#!">
+                                                    <div class="mask" style="background-color: rgba(251, 251, 251, 0.2)"></div>
+                                                </a>
+                                            </div>
+                                            <!-- Image -->
+                                        </div>
+                                                 <div class="col-lg-5 col-md-6 mb-4 mb-lg-0">
+                                            <!-- Data -->
+                                                <p><strong>${obj.cart.productSizeColor.product.name}</strong></p>
+                                                <p>Color:${obj.color}</p>
+                                                <p>Size: ${obj.size}</p>
+                                                <a href="/Cart/Delete/${obj.cart.id}" type="button" class="btn btn-outline-danger  btn-sm me-1 mb-2" data-mdb-toggle="tooltip"
+                                                    title="Remove item" >
+
+                                              <div class="item-remove"><i class="fa fa-trash"></i></div>
+                                            </a>
+                                        </div>
+
+
+                                                <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
+                                                <!-- Quantity -->
+
+                                                <form asp-action="UpdateCart">
+
+
+                                                    <div class="d-flex mb-4" style="max-width: 300px">
+                                                        <button class="btn btn-outline-secondary" data-mdb-toggle="tooltip"
+                                                            onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
+                                                            <input type="submit" value="" style="display:none">
+                                                            <i class="fa fa-minus"></i>
+                                                        </button>
+
+                                                        <div class="form-outline">
+                                                            <input id="form1" min="1" max="${obj.cart.productSizeColor.quantity}" value="${obj.cart.count}" type="number" class="form-control" />
+                                                            <input type="hidden" name="id" value="${obj.cart.id}">
+                                                            <label class="form-label" for="form1">Quantity</label>
+                                                        </div>
+
+                                                        <button class="btn btn-outline-secondary" data-mdb-toggle="tooltip"
+                                                            onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
+                                                            <input type="submit" name="plus" value="" style="display:none">
+                                                            <i class="fa fa-plus"></i>
+                                                        </button>
+                                                    </div>
+
+                                                </form>
+
+
+                                                <!-- Quantity -->
+                                                <!-- Price -->
+                                                <p class="text-start text-md-center">
+                                                            <strong>${obj.cart.productSizeColor.product.priceafterProfit * obj.cart.count}</strong>
+                                                </p>
+                                                <!-- Price -->
+                                            </div>
+                                       
+
+                        </div>
+                                    <!-- Single item -->
+
+                                    <hr class="my-4" />
+
+                        `);
+
+
+            
+       
+
+        });
+
+    </script>
+
+}

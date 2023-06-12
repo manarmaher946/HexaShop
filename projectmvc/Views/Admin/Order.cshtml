@@ -1,0 +1,59 @@
+﻿@model List<Orders>
+@{
+    ViewData["Title"] = "Orders";
+    Layout = "_DashBord";
+    
+}
+
+<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4" style="margin-right:170px ; margin-top:50px">
+    <h2>Orders</h2>
+    <div class="table-responsive">
+        <table class="table table-striped table-sm">
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">OrderDATE</th>
+                    <th scope="col">TOTAL</th>
+                    <th scope="col">CUSTOMER NAME</th>
+                    <th scope="col">Shipper Name</th>
+                    <th scope="col">Assignd</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var order in Model)
+                {
+                    <tr>
+                        <form asp-action="AssignShipper">
+                        <td>@order.Id</td>
+                        <td>@order.OrderDate.ToShortDateString()</td>
+                        <td>@order.TotalPrice.ToString("C")</td>
+                        <td>@order.Customer.UserName</td>
+                        @if(@order.Shipper == null)
+                        {
+                            
+                            <td>
+                                <select name="ShipperId"> 
+                                    @foreach(var item in ViewBag.Shipper){
+                                        <option value="@item.Id" >@item.UserName</option>
+                                    }
+                                </select>
+                            </td>
+                        }
+                        else
+                        {
+                            <td> @order.Shipper.shipper.UserName </td>
+                        }
+                        <td>
+                            
+                               <input type="hidden" name="OrderID" value="@order.Id" />
+                               <input class="btn btn-primary" type="submit" value="Assign">
+                        </td>
+                            </form>
+
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</main>
+

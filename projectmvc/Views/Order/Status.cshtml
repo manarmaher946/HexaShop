@@ -1,0 +1,59 @@
+﻿@*show table elorder that status arrived*@
+
+oreder name addcustmer  custmer name , id from table order
+
+@{
+    ViewData["Title"] = "OrderStatus";
+        Layout = "_NavAndFooter";
+}
+
+<div class="row mt-5 ">
+
+    <div class="my-5"></div>
+
+    <div class="container mb-5 ">
+        <div class="col-md-12">
+            <div class="site-blocks-table">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th class="product-thumbnail">OrderName</th>
+                            <th class="product-name">CustomerName</th>
+                            <th class="product-price">Status</th>
+                            <th class="product-price">Price</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @*for*@
+                        <tr>
+                           
+                            <td class="product-name">
+                                @*name*@
+                                <h2 class="h5 text-black">Order Name</h2>
+                            </td>
+
+                            @*custName*@
+
+                            <td>
+                                CustomerName
+                            </td>
+
+                            @*status*@
+                            <td>status</td>
+                            @*price*@
+                            <td>Price</td>
+                         
+                           
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+ </div>
+
+
+
+
